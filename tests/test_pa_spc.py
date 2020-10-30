@@ -3,7 +3,6 @@ from os.path import dirname, join
 
 import pytest
 
-# from city_scrapers_core.constants import NOT_CLASSIFIED
 from city_scrapers_core.utils import file_response
 from freezegun import freeze_time
 
@@ -22,14 +21,6 @@ parsed_items = [item for item in spider.parse(test_response)]
 print(parsed_items)
 
 freezer.stop()
-
-# def test_tests():
-#     print("Please write some tests for this spider or at least disable this one.")
-#     assert False
-"""
-Uncomment below
-"""
-
 
 def test_title():
     assert parsed_items[0]["title"] == "Transportation Technical Committee"
