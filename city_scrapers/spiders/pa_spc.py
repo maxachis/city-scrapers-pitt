@@ -4,15 +4,17 @@ from city_scrapers_core.constants import COMMISSION
 from city_scrapers_core.items import Meeting
 from city_scrapers_core.spiders import CityScrapersSpider
 
-ADDRESS = "Two Chatham Center, Suite 400 - 112 Washington Pl #500, Pittsburgh, PA, 15219",
-LOCATION_NAME = "SPC South Meeting Room",
+ADDRESS = (
+    "Two Chatham Center, Suite 400 - 112 Washington Pl #500, Pittsburgh, PA, 15219",
+)
+LOCATION_NAME = ("SPC South Meeting Room",)
 
 
 class PaSPCSpider(CityScrapersSpider):
     name = "pa_spc"
     agency = "Southwestern Pennsylvania Commission"
     timezone = "America/New_York"
-    url = 'https://www.spcregion.org/events/'
+    url = "https://www.spcregion.org/events/"
     start_urls = [url]
 
     def parse(self, response):
@@ -31,7 +33,7 @@ class PaSPCSpider(CityScrapersSpider):
                 location=self._parse_location(response, i),
                 links=self._parse_links(response, i),
                 source=self._parse_source(response, i),
-                status=self._parse_status(response, i)
+                status=self._parse_status(response, i),
             )
             meeting["status"] = self._get_status(meeting)
             meeting["id"] = self._get_id(meeting)
@@ -59,12 +61,18 @@ class PaSPCSpider(CityScrapersSpider):
         return COMMISSION
 
     def _parse_start(self, response, index):
-        monthpath = '//div[@class="event"]/div[@class="date"]/span[@class="date_month"]/text()'
+        monthpath = (
+            '//div[@class="event"]/div[@class="date"]/span[@class="date_month"]/text()'
+        )
         month = response.xpath(monthpath).getall()[index]
-        daypath = '//div[@class="event"]/div[@class="date"]/span[@class="date_number"]/text()'
+        daypath = (
+            '//div[@class="event"]/div[@class="date"]/span[@class="date_number"]/text()'
+        )
         day = response.xpath(daypath).getall()[index]
         year = str(self.getYear(month))
-        timepath = '//div[@class="event"]/div[@class="date"]/span[@class="date_time"]/text()'
+        timepath = (
+            '//div[@class="event"]/div[@class="date"]/span[@class="date_time"]/text()'
+        )
         time = response.xpath(timepath).getall()[index]
         """Parse start datetime as a naive datetime object."""
         dateString = "" + year + "-" + month + "-" + day + " " + time
@@ -105,18 +113,18 @@ class PaSPCSpider(CityScrapersSpider):
 
     def getYear(self, monthstr):
         m = {
-            'january': 1,
-            'february': 2,
-            'march': 3,
-            'april': 4,
-            'may': 5,
-            'june': 6,
-            'july': 7,
-            'august': 8,
-            'september': 9,
-            'october': 10,
-            'november': 11,
-            'december': 12
+            "january": 1,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12,
         }
         try:
             curyear = int(datetime.today().strftime("%Y"))
@@ -127,4 +135,4 @@ class PaSPCSpider(CityScrapersSpider):
             return curyear
 
         except Exception:
-            raise ValueError('Not a month: ')
+            raise ValueError("Not a month: ")

@@ -2,6 +2,7 @@ from datetime import datetime
 from os.path import dirname, join
 
 import pytest
+
 # from city_scrapers_core.constants import NOT_CLASSIFIED
 from city_scrapers_core.utils import file_response
 from freezegun import freeze_time
@@ -47,7 +48,10 @@ def test_end():
 
 
 def test_id():
-    assert parsed_items[0]["id"] == "pa_spc/202003191000/x/transportation_technical_committee"
+    assert (
+        parsed_items[0]["id"]
+        == "pa_spc/202003191000/x/transportation_technical_committee"
+    )
 
 
 def test_status():
@@ -56,9 +60,10 @@ def test_status():
 
 def test_location():
     assert parsed_items[0]["location"] == {
-        "name": ('SPC South Meeting Room',),
-        'address':
-            ('Two Chatham Center, Suite 400 - 112 Washington Pl #500, Pittsburgh, PA, 15219',)
+        "name": ("SPC South Meeting Room",),
+        "address": (
+            "Two Chatham Center, Suite 400 - 112 Washington Pl #500, Pittsburgh, PA, 15219",
+        ),
     }
 
 
@@ -67,14 +72,16 @@ def test_source():
 
 
 def test_links():
-    assert parsed_items[0]["links"] == [{
-        'href': 'https://www.spcregion.org/events/transportation-technical-committee-4/',
-        'title': 'Transportation Technical Committee'
-    }]
+    assert parsed_items[0]["links"] == [
+        {
+            "href": "https://www.spcregion.org/events/transportation-technical-committee-4/",
+            "title": "Transportation Technical Committee",
+        }
+    ]
 
 
 def test_classification():
-    assert parsed_items[0]["classification"] == 'Commission'
+    assert parsed_items[0]["classification"] == "Commission"
 
 
 @pytest.mark.parametrize("item", parsed_items)
