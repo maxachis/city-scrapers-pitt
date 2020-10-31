@@ -22,6 +22,7 @@ print(parsed_items)
 
 freezer.stop()
 
+
 def test_title():
     assert parsed_items[0]["title"] == "Transportation Technical Committee"
 
