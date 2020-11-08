@@ -18,7 +18,7 @@ class PaSPCSpider(CityScrapersSpider):
     start_urls = [url]
 
     def parse(self, response):
-        self.logger.info("PARSING")
+        self.logger.info("Parsing PA SPC...")
         events = response.xpath('//div[@class="event"]').getall()
 
         for i in range(len(events)):
