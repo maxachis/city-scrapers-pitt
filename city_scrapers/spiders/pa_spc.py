@@ -41,7 +41,7 @@ class PaSPCSpider(CityScrapersSpider):
 
     def _parse_status(self, response, index):
         title = self._parse_title(response, index)
-        if "CANCELLED" in title:
+        if "CANCELLED" in title.upper():
             return "Event is cancelled"
         else:
             return "Tentative"
