@@ -6,18 +6,6 @@ from city_scrapers_core.constants import BOARD
 from city_scrapers_core.items import Meeting
 from city_scrapers_core.spiders import CityScrapersSpider
 
-# TODO
-# Add location scraper to get address at <p id="location-inline">. Use _parse_location()
-
-monthAndDayPattern = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec"
-monthAndDayPattern += "|January|February|March|April|May|June|July"
-monthAndDayPattern += "|August|September|October|November|December"
-monthAndDayPattern += ")\S* (\d+)"
-yearPattern = "\d\d\d\d"
-timePattern = "(\d{1,2}|\d{1,2}\:\d\d)\s*([A|a|P|p]m)"
-fromPattern = "from " + timePattern
-toPattern = "to " + timePattern
-
 
 class PittWaterSpider(CityScrapersSpider):
     name = "pitt_water"
@@ -56,7 +44,6 @@ class PittWaterSpider(CityScrapersSpider):
                 source=self._parse_source(response),
                 status=self._parse_status(),
             )
-            # meeting["status"] = self._get_status(meeting)
             meeting["id"] = self._get_id(meeting)
             yield meeting
 
@@ -94,7 +81,6 @@ class PittWaterSpider(CityScrapersSpider):
         """Parse location information"""
         loc_str = response.xpath("//*[@class='location-inline']/text()").getall()
         address = loc_str[0] + loc_str[1].replace("\n", " ")
-        """Seems like the meeting is always in the same place given the info in the Agenda PDFs."""
         return {
             "address": address,
             "name": "",
