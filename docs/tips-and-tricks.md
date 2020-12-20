@@ -18,6 +18,13 @@ For an introduction to regular expressions, see [All you need to know about Regu
 - [Regex syntax](https://www.debuggex.com/cheatsheet/regex/python) - for a regex syntax cheatsheet 
 - [Regex checking tools](https://regex101.com/) - to practice and check your regular expressions
 
+### Xpath:
+Because most web pages are based in HTML code, it can be difficult to search a web page using regular expressions alone. Xpath, while originally designed for searching XML documents, also makes it must easier to search web pages, allowing you to search by HTML elements, by what those elements contain, as well as by how a particular HTML element relates to another element, such as whether it is the parent or a child of another element. 
+
+For a tutorial on how to work with Xpath, see [W3Schools' Xpath Tutorial](https://www.w3schools.com/xml/xpath_intro.asp).
+
+- [Xpath Cheatsheet](https://devhints.io/xpath) - For easy reference on Xpath terminology and syntax.
+
 ### Figuring out how a website changes over time:
 A common hazard of web scrapers is that web sites change over time, and web scrapers can easily become outdated, searching for data in locations that are no longer valid, or whose identifying markers have changed. Something as simple as changing a header tag from "h3" to "h4" can break a web scrapers, and in those cases it helps to know what a web page looked like at the time the web scraper was designed. To better identify how a website has changed, we can reference __The Wayback Machine__, a digital archive of websites that can show what websites looked like in the past. 
 - [WaybackMachine](https://archive.org/web/web.php)
